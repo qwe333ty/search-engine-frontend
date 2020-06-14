@@ -1,29 +1,37 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ArticlesComponent } from './pages/articles/articles.component';
-import { ArticleComponent } from './pages/article/article.component';
 import { ArticleListComponent } from './components/article-list/article-list.component';
 import { ArticleDetailsComponent } from './components/article-details/article-details.component';
 import { AddArticleComponent } from './components/add-article/add-article.component';
-import {MatStepperModule} from '@angular/material/stepper';
-import {ReactiveFormsModule} from "@angular/forms";
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatButtonModule} from "@angular/material/button";
 import {MatInputModule} from "@angular/material/input";
+import {SearchModule} from "../ui/search/search.module";
+import {MatExpansionModule} from '@angular/material/expansion';
+import {RouterModule} from "@angular/router";
+import {MatCardModule} from '@angular/material/card';
+import {MatDividerModule} from '@angular/material/divider';
+import {StepperModule} from "../ui/stepper/stepper.module";
 
 
 @NgModule({
-  declarations: [ArticlesComponent, ArticleComponent, ArticleListComponent, ArticleDetailsComponent, AddArticleComponent],
+  declarations: [ArticleListComponent, ArticleDetailsComponent, AddArticleComponent],
   imports: [
     CommonModule,
-    MatStepperModule,
-    ReactiveFormsModule,
     MatFormFieldModule,
     MatButtonModule,
-    MatInputModule
+    MatInputModule,
+    SearchModule,
+    MatExpansionModule,
+    RouterModule,
+    MatCardModule,
+    MatDividerModule,
+    StepperModule
   ],
   exports: [
     AddArticleComponent
+  ],
+  providers: [
   ]
 })
 export class ArticleModule { }

@@ -1,1 +1,27 @@
-<p>article-list works!</p>
+<div align="center">
+  <arah-search (onChangedSearch)="onChangedSearch($event)"></arah-search>
+</div>
+<br>
+<div *ngFor="let article of articles$ | async">
+  <div class="articles-content">
+    <mat-expansion-panel (opened)="article.openedPanel = true"
+                         (closed)="article.openedPanel = false">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <h2 routerLink="/article/details/{{article.id}}">
+            {{article.header}}
+          </h2>
+        </mat-panel-title>
+        <mat-panel-description>
+          <h3>Rating: {{article.rating}}</h3>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <div class="article-description">
+        <h3>Created: {{article.createdWhen}}</h3>
+        <h3>Updated: {{article.updatedWhen}}</h3>
+        <h3>Original Date: {{article.originalDate}}</h3>
+      </div>
+    </mat-expansion-panel>
+  </div>
+  <br>
+</div>

@@ -1,0 +1,8 @@
+.article-description {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.articles-content {
+  opacity: 0.75;
+}

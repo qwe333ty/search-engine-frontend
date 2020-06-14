@@ -1,0 +1,59 @@
+<div class="all-content">
+  <mat-horizontal-stepper linear #stepper>
+    <mat-step [stepControl]="headerFormGroup" [editable]="true">
+      <form [formGroup]="headerFormGroup">
+        <ng-template matStepLabel>Article header</ng-template>
+        <mat-form-field>
+          <mat-label>Header</mat-label>
+          <label>
+            <input matInput formControlName="headerCtrl" placeholder="Header name" required>
+          </label>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="messageFormGroup" [editable]="true">
+      <form [formGroup]="messageFormGroup">
+        <ng-template matStepLabel>Article content</ng-template>
+        <mat-form-field class="example-full-width">
+          <mat-label>Content</mat-label>
+          <label>
+            <textarea matInput formControlName="messageCtrl"></textarea>
+          </label>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="dateFormGroup" [editable]="true">
+      <form [formGroup]="dateFormGroup">
+        <ng-template matStepLabel>Article original date</ng-template>
+        <mat-form-field>
+          <mat-label>Original date</mat-label>
+          <label>
+            <input matInput [matDatepicker]="picker2" formControlName="dateCtrl">
+          </label>
+          <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+          <mat-datepicker touchUi #picker2></mat-datepicker>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Done</ng-template>
+      <p>You are now done.</p>
+      <div>
+        <button mat-button (click)="articleCreated()">Done</button>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button (click)="stepper.reset()">Reset</button>
+      </div>
+    </mat-step>
+  </mat-horizontal-stepper>
+</div>
