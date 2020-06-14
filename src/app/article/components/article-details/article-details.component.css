@@ -1,3 +1,7 @@
 .example-card {
   max-width: 600px;
 }
+
+.input-content {
+  max-width: 45px;
+}

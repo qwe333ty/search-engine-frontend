@@ -1,4 +1,6 @@
 import {Component, OnInit} from '@angular/core';
+import {Article} from "../../shared/article";
+import {ArticlesService} from "../../shared/articles.service";
 
 @Component({
   selector: 'app-add-article',
@@ -7,14 +9,13 @@ import {Component, OnInit} from '@angular/core';
 })
 export class AddArticleComponent implements OnInit {
 
-
-  constructor() {
+  constructor(private articlesService: ArticlesService) {
   }
 
   ngOnInit(): void {
   }
 
-  handleCreatedArticle() {
-
+  handleCreatedArticle(article: Article) {
+    this.articlesService.createArticle(article);
   }
 }

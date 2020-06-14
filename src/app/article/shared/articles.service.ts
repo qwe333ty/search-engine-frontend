@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import {Article} from "./article";
-import { catchError, map, tap } from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
 import {InternalArticle} from "./internal-article";
 
 @Injectable({
@@ -18,6 +18,7 @@ export class ArticlesService {
 
   constructor(private http: HttpClient) { }
 
+  //TODO: remove stubs
   findArticles(searchValue: string): Observable<InternalArticle[]> {
     let article1 = new InternalArticle();
     article1.id = '1123';
@@ -36,17 +37,26 @@ export class ArticlesService {
     article2.originalDate = new Date();
     article2.updatedWhen = new Date();
     article2.createdWhen = new Date();
+    return of([article1, article2]);
 /*    return this.http.get<InternalArticle[]>(this.articleUrn).pipe(
       catchError(this.handleError<InternalArticle[]>('Find Articles', []))
     );*/
-    return of([article1, article2]);
   }
 
   findArticleById(articleId: string): Observable<Article> {
-    const urn = `${this.articleUrn}/${articleId}`;
+    let article1 = new InternalArticle();
+    article1.id = '1123';
+    article1.header = 'Bicycle';
+    article1.message = 'Message dhAlkfj   ALS l NDflANDf lzxc ml ldz.. lszdl ;zlc vz;l klskd ;lz:L xsd l;L DKfl;k zll D:F';
+    article1.rating = 5.3;
+    article1.originalDate = new Date();
+    article1.updatedWhen = new Date();
+    article1.createdWhen = new Date();
+    return of(article1);
+/*    const urn = `${this.articleUrn}/${articleId}`;
     return this.http.get<Article>(urn).pipe(
       catchError(this.handleError<Article>('Get Article by Id', null))
-    );
+    );*/
   }
 
   createArticle(entity: Article): Observable<Article> {
@@ -56,6 +66,7 @@ export class ArticlesService {
   }
 
   updateArticle(entity: Article): Observable<Article> {
+    //return of(entity);
     const urn = `${this.articleUrn}/${entity.id}`;
     return this.http.put<Article>(urn, entity, this.httpOptions).pipe(
       catchError(this.handleError<Article>('Update Article', null))

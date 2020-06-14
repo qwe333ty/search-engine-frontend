@@ -12,10 +12,12 @@ import {RouterModule} from "@angular/router";
 import {MatCardModule} from '@angular/material/card';
 import {MatDividerModule} from '@angular/material/divider';
 import {StepperModule} from "../ui/stepper/stepper.module";
+import { EditArticleComponent } from './components/edit-article/edit-article.component';
+import {FormsModule} from "@angular/forms";
 
 
 @NgModule({
-  declarations: [ArticleListComponent, ArticleDetailsComponent, AddArticleComponent],
+  declarations: [ArticleListComponent, ArticleDetailsComponent, AddArticleComponent, EditArticleComponent],
   imports: [
     CommonModule,
     MatFormFieldModule,
@@ -26,7 +28,8 @@ import {StepperModule} from "../ui/stepper/stepper.module";
     RouterModule,
     MatCardModule,
     MatDividerModule,
-    StepperModule
+    StepperModule,
+    FormsModule
   ],
   exports: [
     AddArticleComponent

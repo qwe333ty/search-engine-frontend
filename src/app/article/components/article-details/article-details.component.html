@@ -8,12 +8,14 @@
       <mat-card-subtitle>Original Date: {{article.originalDate}}</mat-card-subtitle>
     </mat-card-header>
     <mat-divider></mat-divider>
+    <br>
     <mat-card-content>
       <p>
         {{article.message}}
       </p>
     </mat-card-content>
     <mat-card-actions>
+      <input class="input-content" placeholder="Rating" min = "0" max="10" [(ngModel)]="estimationValue">
       <button mat-button (click)="onRate()">Rate</button>
       <button mat-button (click)="onEdit()">Edit</button>
       <button mat-button (click)="onDelete()">Delete</button>

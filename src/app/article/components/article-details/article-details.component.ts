@@ -15,6 +15,8 @@ export class ArticleDetailsComponent implements OnInit {
 
   originalArticle$: Observable<Article>;
 
+  estimationValue: number;
+
   constructor(private route: ActivatedRoute,
               private router: Router,
               private articlesService: ArticlesService,
@@ -36,10 +38,8 @@ export class ArticleDetailsComponent implements OnInit {
 
     const id = +this.route.snapshot.paramMap.get('id');
     articleRating.articleId = id.toString();
-    articleRating.userEstimation = Math.random() % 10.0
-    if (articleRating.userEstimation < 0) {
-      articleRating.userEstimation *= -1;
-    }
+    articleRating.userEstimation = this.estimationValue;
+
     this.ratingService.rateArticle(articleRating).subscribe(newRating => {
       this.originalArticle$.subscribe(article => {
         article.rating = newRating
@@ -48,7 +48,8 @@ export class ArticleDetailsComponent implements OnInit {
   }
 
   onEdit() {
-    this.router.navigate(['/article/edit']);
+    const id = +this.route.snapshot.paramMap.get('id');
+    this.router.navigate([`/article/${id}/edit`]);
   }
 
   onDelete() {

@@ -32,7 +32,7 @@ export class StepperComponent implements OnInit {
       messageCtrl: ['', Validators.required]
     });
     this.dateFormGroup = this._formBuilder.group({
-      dateCtrl: this.serializedDate
+      dateCtrl: [this.serializedDate, Validators.required]
     });
     this.articleData$.subscribe(article => {
       if (article != null) {

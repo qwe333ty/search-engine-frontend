@@ -7,12 +7,14 @@ import {NotFoundModule} from "./ui/not-found/not-found.module";
 import {NotFoundComponent} from "./ui/not-found/not-found/not-found.component";
 import {ArticleListComponent} from "./article/components/article-list/article-list.component";
 import {ArticleDetailsComponent} from "./article/components/article-details/article-details.component";
+import {EditArticleComponent} from "./article/components/edit-article/edit-article.component";
 
 
 const routes: Routes = [
   { path: 'article/:id/details', component: ArticleDetailsComponent },
   { path: 'article/search', component:  ArticleListComponent },
   { path: 'article/create', component: AddArticleComponent},
+  { path: 'article/:id/edit', component: EditArticleComponent },
   { path: '', redirectTo: '/article/search', pathMatch: 'full' },
   { path: '**', component: NotFoundComponent }
 ];
