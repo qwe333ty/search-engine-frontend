@@ -20,7 +20,7 @@ export class ArticlesService {
 
   //TODO: remove stubs
   findArticles(searchValue: string): Observable<InternalArticle[]> {
-    let article1 = new InternalArticle();
+/*    let article1 = new InternalArticle();
     article1.id = '1123';
     article1.header = 'Bicycle';
     article1.message = 'Message dhAlkfj   ALS l NDflANDf lzxc ml ldz.. lszdl ;zlc vz;l klskd ;lz:L xsd l;L DKfl;k zll D:F';
@@ -37,14 +37,14 @@ export class ArticlesService {
     article2.originalDate = new Date();
     article2.updatedWhen = new Date();
     article2.createdWhen = new Date();
-    return of([article1, article2]);
-/*    return this.http.get<InternalArticle[]>(this.articleUrn).pipe(
+    return of([article1, article2]);*/
+    return this.http.get<InternalArticle[]>(this.articleUrn).pipe(
       catchError(this.handleError<InternalArticle[]>('Find Articles', []))
-    );*/
+    );
   }
 
   findArticleById(articleId: string): Observable<Article> {
-    let article1 = new InternalArticle();
+/*    let article1 = new InternalArticle();
     article1.id = '1123';
     article1.header = 'Bicycle';
     article1.message = 'Message dhAlkfj   ALS l NDflANDf lzxc ml ldz.. lszdl ;zlc vz;l klskd ;lz:L xsd l;L DKfl;k zll D:F';
@@ -52,11 +52,11 @@ export class ArticlesService {
     article1.originalDate = new Date();
     article1.updatedWhen = new Date();
     article1.createdWhen = new Date();
-    return of(article1);
-/*    const urn = `${this.articleUrn}/${articleId}`;
+    return of(article1);*/
+    const urn = `${this.articleUrn}/${articleId}`;
     return this.http.get<Article>(urn).pipe(
       catchError(this.handleError<Article>('Get Article by Id', null))
-    );*/
+    );
   }
 
   createArticle(entity: Article): Observable<Article> {
