@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {ArticleRating} from "./rating";
 import {Observable, of} from "rxjs";
 import {catchError} from "rxjs/operators";
+import {Article} from "./article";
 
 @Injectable({
   providedIn: 'root'
@@ -17,8 +18,8 @@ export class RatingService {
 
   constructor(private http: HttpClient) { }
 
-  rateArticle(rating: ArticleRating): Observable<number> {
-    return this.http.post<number>(this.recalculateUrn, rating, this.httpOptions).pipe(
+  rateArticle(rating: ArticleRating): Observable<Article> {
+    return this.http.post<Article>(this.recalculateUrn, rating, this.httpOptions).pipe(
       catchError(this.handleError('Rate Article', null))
     );
   }

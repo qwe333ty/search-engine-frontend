@@ -4,6 +4,8 @@ import { Observable, of } from 'rxjs';
 import {Article} from "./article";
 import { catchError } from 'rxjs/operators';
 import {InternalArticle} from "./internal-article";
+import {SearchArticle} from "./search-article";
+import {DatePipe} from "@angular/common";
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +18,8 @@ export class ArticlesService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+              private datePipe: DatePipe) { }
 
   //TODO: remove stubs
   findArticles(searchValue: string): Observable<InternalArticle[]> {
@@ -38,7 +41,11 @@ export class ArticlesService {
     article2.updatedWhen = new Date();
     article2.createdWhen = new Date();
     return of([article1, article2]);*/
-    return this.http.get<InternalArticle[]>(this.articleUrn).pipe(
+    let searchArticle = new SearchArticle();
+    searchArticle.searchText = searchValue;
+
+    const urn = `${this.articleUrn}/search`;
+    return this.http.post<InternalArticle[]>(urn, searchArticle, this.httpOptions).pipe(
       catchError(this.handleError<InternalArticle[]>('Find Articles', []))
     );
   }
@@ -65,9 +72,9 @@ export class ArticlesService {
     );
   }
 
-  updateArticle(entity: Article): Observable<Article> {
+  updateArticle(id: string, entity: Article): Observable<Article> {
     //return of(entity);
-    const urn = `${this.articleUrn}/${entity.id}`;
+    const urn = `${this.articleUrn}/${id}`;
     return this.http.put<Article>(urn, entity, this.httpOptions).pipe(
       catchError(this.handleError<Article>('Update Article', null))
     );
@@ -75,7 +82,7 @@ export class ArticlesService {
 
   deleteArticle(articleId: string): void {
     const urn = `${this.articleUrn}/${articleId}`;
-    this.http.delete<any>(urn);
+    this.http.delete<any>(urn).subscribe(catchError(this.handleError<any>('Delete Article By Id')));
   }
 
   private handleError<T>(operation = 'operation', result?: T) {

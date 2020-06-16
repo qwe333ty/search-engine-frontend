@@ -5,6 +5,7 @@ import {Observable} from "rxjs";
 import {Article} from "../../shared/article";
 import {RatingService} from "../../shared/rating.service";
 import {ArticleRating} from "../../shared/rating";
+import {switchMap} from "rxjs/operators";
 
 @Component({
   selector: 'app-article-details',
@@ -17,44 +18,37 @@ export class ArticleDetailsComponent implements OnInit {
 
   estimationValue: number;
 
+  private articleId: string;
+
   constructor(private route: ActivatedRoute,
               private router: Router,
               private articlesService: ArticlesService,
               private ratingService: RatingService) { }
 
   ngOnInit(): void {
-    this.getArticle();
-  }
-
-  getArticle(): void {
-    const id = +this.route.snapshot.paramMap.get('id');
-    if (id != null) {
-      this.originalArticle$ = this.articlesService.findArticleById(id.toString());
-    }
+    this.originalArticle$ = this.route.paramMap.pipe(
+      switchMap(params => {
+        this.articleId = params.get('id');
+        return this.articlesService.findArticleById(this.articleId);
+      })
+    );
   }
 
   onRate() {
     let articleRating = new ArticleRating();
 
-    const id = +this.route.snapshot.paramMap.get('id');
-    articleRating.articleId = id.toString();
+    articleRating.articleId = this.articleId;
     articleRating.userEstimation = this.estimationValue;
 
-    this.ratingService.rateArticle(articleRating).subscribe(newRating => {
-      this.originalArticle$.subscribe(article => {
-        article.rating = newRating
-      });
-    });
+    this.originalArticle$ = this.ratingService.rateArticle(articleRating);
   }
 
   onEdit() {
-    const id = +this.route.snapshot.paramMap.get('id');
-    this.router.navigate([`/article/${id}/edit`]);
+    this.router.navigate(['article', this.articleId, 'edit']);
   }
 
   onDelete() {
-    const id = +this.route.snapshot.paramMap.get('id');
-    this.articlesService.deleteArticle(id.toString());
+    this.articlesService.deleteArticle(this.articleId);
     this.router.navigate(['/article/search']);
   }
 }

@@ -2,10 +2,10 @@
   <mat-card class="example-card">
     <mat-card-header>
       <mat-card-title>{{article.header}}</mat-card-title>
-      <mat-card-subtitle>Rating: {{article.rating}}</mat-card-subtitle>
-      <mat-card-subtitle>Created: {{article.createdWhen}}</mat-card-subtitle>
-      <mat-card-subtitle>Updated: {{article.updatedWhen}}</mat-card-subtitle>
-      <mat-card-subtitle>Original Date: {{article.originalDate}}</mat-card-subtitle>
+      <mat-card-subtitle>Rating: {{article.rating | number : '1.2-2'}}</mat-card-subtitle>
+      <mat-card-subtitle>Created: {{article.createdWhen | date: 'medium'}}</mat-card-subtitle>
+      <mat-card-subtitle>Updated: {{article.updatedWhen ? (article.createdWhen | date: 'medium') : 'Article was never updated'}}</mat-card-subtitle>
+      <mat-card-subtitle>Original Date: {{article.originalDate | date: 'mediumDate'}}</mat-card-subtitle>
     </mat-card-header>
     <mat-divider></mat-divider>
     <br>

@@ -3,8 +3,8 @@
     <input matInput type="search"
            placeholder="Type your text here"
            class="search-input"
-           [ngModel]="searchString"
-           (change)="emitChangedSearchStringEvent()">
+           #searchInput
+           (change)="emitChangedSearchStringEvent(searchInput.value)">
   </label>
   <mat-icon matPrefix color="primary">search</mat-icon>
 </mat-form-field>

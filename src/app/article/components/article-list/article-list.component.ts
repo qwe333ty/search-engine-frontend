@@ -14,6 +14,9 @@ import {InternalArticle} from "../../shared/internal-article";
 export class ArticleListComponent implements OnInit {
 
   articles$: Observable<InternalArticle[]>;
+
+  emptyResult: boolean;
+
   private searchTerms = new Subject<string>();
 
   constructor(private articlesService: ArticlesService) { }
@@ -29,6 +32,7 @@ export class ArticleListComponent implements OnInit {
       // switch to new search observable each time the term changes
       switchMap((searchValue: string) => this.articlesService.findArticles(searchValue)),
     );
+    this.articles$.subscribe(articles => this.emptyResult = ((articles == null) || (articles.length == 0)));
   }
 
   onChangedSearch(searchValue: string) {

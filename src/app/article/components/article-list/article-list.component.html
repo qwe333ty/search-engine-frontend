@@ -2,6 +2,9 @@
   <arah-search (onChangedSearch)="onChangedSearch($event)"></arah-search>
 </div>
 <br>
+<div *ngIf="emptyResult" align="center">
+  <h2>Sorry, We have found nothing</h2>
+</div>
 <div *ngFor="let article of articles$ | async">
   <div class="articles-content">
     <mat-expansion-panel (opened)="article.openedPanel = true"
@@ -13,13 +16,13 @@
           </h2>
         </mat-panel-title>
         <mat-panel-description>
-          <h3>Rating: {{article.rating}}</h3>
+          <h3>Rating: {{article.rating | number : '1.2-2'}}</h3>
         </mat-panel-description>
       </mat-expansion-panel-header>
       <div class="article-description">
-        <h3>Created: {{article.createdWhen}}</h3>
-        <h3>Updated: {{article.updatedWhen}}</h3>
-        <h3>Original Date: {{article.originalDate}}</h3>
+        <h3>Created: {{article.createdWhen | date: 'medium'}}</h3>
+        <h3>Updated: {{article.updatedWhen ? (article.createdWhen | date: 'medium') : 'Article was never updated'}}</h3>
+        <h3>Original Date: {{article.originalDate | date: 'mediumDate'}}</h3>
       </div>
     </mat-expansion-panel>
   </div>
