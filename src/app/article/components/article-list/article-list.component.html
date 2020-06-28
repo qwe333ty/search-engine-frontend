@@ -21,7 +21,7 @@
       </mat-expansion-panel-header>
       <div class="article-description">
         <h3>Created: {{article.createdWhen | date: 'medium'}}</h3>
-        <h3>Updated: {{article.updatedWhen ? (article.createdWhen | date: 'medium') : 'Article was never updated'}}</h3>
+        <h3>Updated: {{article.updatedWhen ? (article.updatedWhen | date: 'medium') : 'Article was never updated'}}</h3>
         <h3>Original Date: {{article.originalDate | date: 'mediumDate'}}</h3>
       </div>
     </mat-expansion-panel>
